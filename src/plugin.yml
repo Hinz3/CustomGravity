@@ -1,0 +1,60 @@
+name: Custom Gravity
+main: me.shadow5353.customgravity.CustomGravity
+version: 0.1
+description: chance your gravity with commands
+author: shadow5353
+
+commands:
+    customgravity:
+        usage: /<command>
+        description: main command
+        aliases: [cg]
+
+permission:
+    customgravity.*:
+        description: Gives all permission to the plugin
+        children:
+            customgravity.1: op
+            customgravity.2: op
+            customgravity.3: op
+            customgravity.4: op
+            customgravity.5: op
+            customgravity.0: op
+            customgravity.-1: op
+            customgravity.-2: op
+            customgravity.-3: op
+            customgravity.-4: op
+            customgravity.-5: op
+    customgravity.0:
+        description: Gives permission to /cg 0
+        default: op
+    customgravity.1:
+        description: Gives permission to /cg 1
+        default: op
+    customgravity.2:
+        description: Gives permission to /cg 2
+        default: op
+    customgravity.3:
+        description: Gives permission to /cg 3
+        default: op
+    customgravity.4:
+        description: Gives permission to /cg 4
+        default: op
+    customgravity.5:
+        description: Gives permission to /cg 5
+        default: op
+    customgravity.-1:
+        description: Gives permission to /cg -1
+        default: op
+    customgravity.-2:
+        description: Gives permission to /cg -2
+        default: op
+    customgravity.-3:
+        description: Gives permission to /cg -3
+        default: op
+    customgravity.-4:
+        description: Gives permission to /cg -4
+        default: op
+    customgravity.-5:
+        description: Gives permission to /cg -5
+        default: op
