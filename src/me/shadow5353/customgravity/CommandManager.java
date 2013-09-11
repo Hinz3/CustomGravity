@@ -2,14 +2,18 @@ package me.shadow5353.customgravity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import me.shadow5353.customgravity.cmds.cg0;
+import me.shadow5353.customgravity.cmds.cg1;
+import me.shadow5353.customgravity.cmds.cg2;
+import me.shadow5353.customgravity.cmds.cg3;
+import me.shadow5353.customgravity.cmds.cg4;
+import me.shadow5353.customgravity.cmds.cg5;
 import me.shadow5353.customgravity.cmds.cgn1;
 import me.shadow5353.customgravity.cmds.cgn2;
 import me.shadow5353.customgravity.cmds.cgn3;
 import me.shadow5353.customgravity.cmds.cgn4;
 import me.shadow5353.customgravity.cmds.cgn5;
 import me.shadow5353.shadowpack.cmd.SubCommand;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,6 +29,12 @@ public class CommandManager implements CommandExecutor {
 		commands.add(new cgn2());
 		commands.add(new cgn1());
 		commands.add(new cgn4());
+		commands.add(new cg0());
+		commands.add(new cg1());
+		commands.add(new cg2());
+		commands.add(new cg3());
+		commands.add(new cg4());
+		commands.add(new cg5());
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -68,16 +78,6 @@ public class CommandManager implements CommandExecutor {
 		}
 
 		return true;
-	}
-
-	private String aliases(SubCommand cmd) {
-		String fin = "";
-
-		for (String a : cmd.aliases()) {
-			fin += a + " | ";
-		}
-
-		return fin.substring(0, fin.lastIndexOf(" | "));
 	}
 
 	private SubCommand get(String name) {
