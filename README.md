@@ -23,5 +23,13 @@ Permission
 - customgravity.4 : This give you access to chance your gravity to 4.
 - customgravity.5 : This give you access to chance your gravity to 5.
 - customgravity.-1 : This give you access to chance your gravity to -1.
-- customgravity.-1 : This give you access to chance your gravity to -1.
-- customgravity.-1 : This give you access to chance your gravity to -1.
+- customgravity.-2 : This give you access to chance your gravity to -2.
+- customgravity.-3 : This give you access to chance your gravity to -3.
+- customgravity.-4 : This give you access to chance your gravity to -4.
+- customgravity.-5 : This give you access to chance your gravity to -5.
+
+
+Note:
+=============
+
+The plugin is not able to remove the effect from gravity 5 to -5, you have to go into gravity 0 to remove it.
