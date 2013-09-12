@@ -1,30 +1,30 @@
 package me.shadow5353.customgravity.cmds;
 
 import me.shadow5353.customgravity.MessageManager;
-import me.shadow5353.customgravity.cmds.SubCommand;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-public class cgn1 extends SubCommand{ // /cg -1
+public class remove extends SubCommand{
 
 	public void onCommand(Player p, String[] args) {
-		if(!(p.hasPermission("customgravity.-1"))){
+		if(!(p.hasPermission("customgravity.gravity"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 0));
 		}
+		MessageManager.getInstance().good(p, "Removed all potion effects");
+		for (PotionEffect effect : p.getActivePotionEffects())
+	        p.removePotionEffect(effect.getType());
 	}
 
 	public String name() {
-		return "-1";
+		return "remove";
 	}
 
 	public String info() {
-		return "Sets the Gravity to -1";
+		return "Remove all potion effects";
 	}
 
 	public String[] aliases() {
-		return new String[] { "-1" };
+		return new String[] { "remove" };
 	}
 }

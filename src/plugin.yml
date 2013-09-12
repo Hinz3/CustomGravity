@@ -1,6 +1,6 @@
 name: Custom Gravity
 main: me.shadow5353.customgravity.CustomGravity
-version: 0.1
+version: 0.2
 description: chance your gravity with commands
 author: shadow5353
 
@@ -25,6 +25,7 @@ permission:
             customgravity.-3: op
             customgravity.-4: op
             customgravity.-5: op
+            customgravity.gravity: op
     customgravity.0:
         description: Gives permission to /cg 0
         default: op
@@ -58,3 +59,9 @@ permission:
     customgravity.-5:
         description: Gives permission to /cg -5
         default: op
+    customgravity.gravity:
+        description: Gives permission to /cg gravity
+        default: true
+    customgravity.help:
+        description: Gives permission to /cg help
+        default: true

@@ -14,20 +14,6 @@ public class cgn5 extends SubCommand{
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
 		MessageManager.getInstance().good(p, "Gravity set to -5");
-		for(PotionEffect po : p.getActivePotionEffects()){
-			if(po.getType() == PotionEffectType.SPEED){
-				for (PotionEffect effect : p.getActivePotionEffects())
-			        p.removePotionEffect(effect.getType());
-			}
-			if(po.getType() == PotionEffectType.JUMP){
-				for (PotionEffect effect : p.getActivePotionEffects())
-			        p.removePotionEffect(effect.getType());
-			}
-			if(po.getType() == PotionEffectType.SLOW){
-				for (PotionEffect effect : p.getActivePotionEffects())
-			        p.removePotionEffect(effect.getType());
-			}
-			}
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 4));
 	}
 

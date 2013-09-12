@@ -18,6 +18,12 @@ public class MessageManager {
 	public void info(CommandSender s, String msg) {
 		msg(s, ChatColor.YELLOW, msg);
 	}
+	public void cmd(CommandSender s, String msg) {
+		msg(s, ChatColor.GOLD, msg);
+	}
+	public void g(CommandSender s, String msg) {
+		msg(s, ChatColor.GOLD, msg);
+	}
 
 	public void severe(CommandSender s, String msg) {
 		msg(s, ChatColor.RED, msg);

@@ -2,6 +2,7 @@ package me.shadow5353.customgravity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import me.shadow5353.customgravity.cmds.cg0;
 import me.shadow5353.customgravity.cmds.cg1;
 import me.shadow5353.customgravity.cmds.cg2;
@@ -14,6 +15,10 @@ import me.shadow5353.customgravity.cmds.cgn3;
 import me.shadow5353.customgravity.cmds.cgn4;
 import me.shadow5353.customgravity.cmds.cgn5;
 import me.shadow5353.customgravity.cmds.SubCommand;
+import me.shadow5353.customgravity.cmds.gravity;
+import me.shadow5353.customgravity.cmds.remove;
+
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,6 +40,8 @@ public class CommandManager implements CommandExecutor {
 		commands.add(new cg3());
 		commands.add(new cg4());
 		commands.add(new cg5());
+		commands.add(new gravity());
+		commands.add(new remove());
 
 	}
 
@@ -50,7 +57,8 @@ public class CommandManager implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("customgravity")) {
 			if (args.length == 0) {
 				for (SubCommand c : commands) {
-					MessageManager.getInstance().info(p, "/cg " + c.name() + " - " + c.info());
+					MessageManager.getInstance().cmd(p, "/cg " + c.name() + ChatColor.BLACK + " : " + ChatColor.YELLOW + c.info());
+					MessageManager.getInstance().info(p, "This server is running Custom Gravity on version" + ChatColor.GOLD + " 0.2");
 				}
 				return true;
 			}
