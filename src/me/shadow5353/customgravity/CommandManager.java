@@ -13,7 +13,7 @@ import me.shadow5353.customgravity.cmds.cgn2;
 import me.shadow5353.customgravity.cmds.cgn3;
 import me.shadow5353.customgravity.cmds.cgn4;
 import me.shadow5353.customgravity.cmds.cgn5;
-import me.shadow5353.shadowpack.cmd.SubCommand;
+import me.shadow5353.customgravity.cmds.SubCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,6 +35,7 @@ public class CommandManager implements CommandExecutor {
 		commands.add(new cg3());
 		commands.add(new cg4());
 		commands.add(new cg5());
+
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -74,6 +75,7 @@ public class CommandManager implements CommandExecutor {
 				MessageManager.getInstance().severe(p, "An error has occured: " + e.getCause());
 				e.printStackTrace();
 			}
+			
 
 		}
 

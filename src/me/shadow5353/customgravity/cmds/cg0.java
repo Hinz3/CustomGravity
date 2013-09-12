@@ -1,9 +1,10 @@
 package me.shadow5353.customgravity.cmds;
 
 import me.shadow5353.customgravity.MessageManager;
-import me.shadow5353.shadowpack.cmd.SubCommand;
+import me.shadow5353.customgravity.cmds.SubCommand;
 
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 public class cg0 extends SubCommand{
 
@@ -12,6 +13,8 @@ public class cg0 extends SubCommand{
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
 		MessageManager.getInstance().good(p, "Gravity set to 0");
+		for (PotionEffect effect : p.getActivePotionEffects())
+	        p.removePotionEffect(effect.getType());
 	}
 
 	public String name() {
