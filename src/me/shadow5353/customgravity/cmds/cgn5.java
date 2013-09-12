@@ -13,6 +13,9 @@ public class cgn5 extends SubCommand{
 		if(!(p.hasPermission("customgravity.-5"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
+		p.removePotionEffect(PotionEffectType.SPEED);
+		p.removePotionEffect(PotionEffectType.JUMP);
+		p.removePotionEffect(PotionEffectType.SLOW);
 		MessageManager.getInstance().good(p, "Gravity set to -5");
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 4));
 	}

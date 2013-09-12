@@ -26,6 +26,7 @@ permission:
             customgravity.-4: op
             customgravity.-5: op
             customgravity.gravity: op
+            customgravity.remove: op
     customgravity.0:
         description: Gives permission to /cg 0
         default: op
@@ -62,6 +63,6 @@ permission:
     customgravity.gravity:
         description: Gives permission to /cg gravity
         default: true
-    customgravity.help:
-        description: Gives permission to /cg help
-        default: true
+    customgravity.remove:
+        description: Gives permission to /cg remove
+        default: op

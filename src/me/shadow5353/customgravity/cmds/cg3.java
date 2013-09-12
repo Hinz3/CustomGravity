@@ -13,6 +13,9 @@ public class cg3 extends SubCommand{ // /cg 3
 		if(!(p.hasPermission("customgravity.3"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
+		p.removePotionEffect(PotionEffectType.SPEED);
+		p.removePotionEffect(PotionEffectType.JUMP);
+		p.removePotionEffect(PotionEffectType.SLOW);
 		MessageManager.getInstance().good(p, "Gravity set to 3");
 		p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 2));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));

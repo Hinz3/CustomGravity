@@ -3,6 +3,7 @@ package me.shadow5353.customgravity;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import me.shadow5353.customgravity.cmds.Infomation;
 import me.shadow5353.customgravity.cmds.cg0;
 import me.shadow5353.customgravity.cmds.cg1;
 import me.shadow5353.customgravity.cmds.cg2;
@@ -42,6 +43,7 @@ public class CommandManager implements CommandExecutor {
 		commands.add(new cg5());
 		commands.add(new gravity());
 		commands.add(new remove());
+		commands.add(new Infomation());
 
 	}
 
@@ -58,7 +60,6 @@ public class CommandManager implements CommandExecutor {
 			if (args.length == 0) {
 				for (SubCommand c : commands) {
 					MessageManager.getInstance().cmd(p, "/cg " + c.name() + ChatColor.BLACK + " : " + ChatColor.YELLOW + c.info());
-					MessageManager.getInstance().info(p, "This server is running Custom Gravity on version" + ChatColor.GOLD + " 0.2");
 				}
 				return true;
 			}
@@ -90,7 +91,7 @@ public class CommandManager implements CommandExecutor {
 		return true;
 	}
 
-	private SubCommand get(String name) {
+	public SubCommand get(String name) {
 		for (SubCommand cmd : commands) {
 			if (cmd.name().equalsIgnoreCase(name)) return cmd;
 			for (String alias : cmd.aliases()) if (name.equalsIgnoreCase(alias)) return cmd;

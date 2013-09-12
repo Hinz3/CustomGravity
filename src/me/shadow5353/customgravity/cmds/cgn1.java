@@ -12,8 +12,12 @@ public class cgn1 extends SubCommand{ // /cg -1
 	public void onCommand(Player p, String[] args) {
 		if(!(p.hasPermission("customgravity.-1"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 0));
 		}
+		p.removePotionEffect(PotionEffectType.SPEED);
+		p.removePotionEffect(PotionEffectType.JUMP);
+		p.removePotionEffect(PotionEffectType.SLOW);
+		MessageManager.getInstance().good(p, "Gravity set to -1");
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 0));
 	}
 
 	public String name() {

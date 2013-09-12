@@ -4,7 +4,7 @@ import me.shadow5353.customgravity.MessageManager;
 import me.shadow5353.customgravity.cmds.SubCommand;
 
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class cg0 extends SubCommand{
 
@@ -12,9 +12,10 @@ public class cg0 extends SubCommand{
 		if(!(p.hasPermission("customgravity.0"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
+		p.removePotionEffect(PotionEffectType.SPEED);
+		p.removePotionEffect(PotionEffectType.JUMP);
+		p.removePotionEffect(PotionEffectType.SLOW);
 		MessageManager.getInstance().good(p, "Gravity set to 0");
-		for (PotionEffect effect : p.getActivePotionEffects())
-	        p.removePotionEffect(effect.getType());
 	}
 
 	public String name() {

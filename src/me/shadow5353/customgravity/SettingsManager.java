@@ -1,68 +1,56 @@
 package me.shadow5353.customgravity;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
 
-import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+
 
 public class SettingsManager {
 
-	private SettingsManager() { }
+    private SettingsManager() { }
+   
+    static SettingsManager instance = new SettingsManager();
+   
+    public static SettingsManager getInstance() {
+            return instance;
+    }
+   
+    Plugin p;
+    FileConfiguration config;
+    File cfile;
+   
+    public void setup(Plugin p) {
+            config = p.getConfig();
+            config.options().copyDefaults(true);
+            cfile = new File(p.getDataFolder(), "config.yml");
+            saveConfig();
+    }
 
-	private static SettingsManager instance = new SettingsManager();
 
-	public static SettingsManager getInstance() {
-		return instance;
-	}
-
-	private Plugin p;
-	private FileConfiguration arenas;
-	private File afile;
-
-	public void setup(Plugin p) {
-		this.p = p;
-
-		if (!p.getDataFolder().exists()) p.getDataFolder().mkdir();
-
-		afile = new File(p.getDataFolder(), "arenas.yml");
-
-		boolean n = false;
-
-		if (!afile.exists()) {
-			try { afile.createNewFile(); n = true; }
-			catch (Exception e) { e.printStackTrace(); }
-		}
-
-		arenas = YamlConfiguration.loadConfiguration(afile);
-
-		if (n) set("ids", new ArrayList<String>());
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T get(String path) {
-		return (T) arenas.get(path);
-	}
-
-	public void set(String path, Object value) {
-		arenas.set(path, value);
-		save();
-	}
-
-	public ConfigurationSection createConfigurationSection(String path) {
-		ConfigurationSection s = arenas.createSection(path);
-		save();
-		return s;
-	}
-
-	private void save() {
-		try { arenas.save(afile); }
-		catch (Exception e) { e.printStackTrace(); }
-	}
-
-	public Plugin getPlugin() {
-		return p;
-	}
+	public FileConfiguration getConfig() {
+            return config;
+    }
+   
+    public void saveConfig() {
+            try {
+                    config.save(cfile);
+            }
+            catch (IOException e) {
+                    Bukkit.getServer().getLogger().severe(ChatColor.RED + "Could not save config.yml!");
+            }
+    }
+   
+    public void reloadConfig() {
+            config = YamlConfiguration.loadConfiguration(cfile);
+    }
+   
+    public PluginDescriptionFile getDesc() {
+            return p.getDescription();
+    }
 }
