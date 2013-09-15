@@ -11,10 +11,12 @@ public class remove extends SubCommand{
 		if(!(p.hasPermission("customgravity.remove"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
-		p.removePotionEffect(PotionEffectType.SPEED);
-		p.removePotionEffect(PotionEffectType.JUMP);
-		p.removePotionEffect(PotionEffectType.SLOW);
-		MessageManager.getInstance().good(p, "Removed all gravity effects!");
+		else if(p.hasPermission("customgravity.remove")){
+			p.removePotionEffect(PotionEffectType.SPEED);
+			p.removePotionEffect(PotionEffectType.JUMP);
+			p.removePotionEffect(PotionEffectType.SLOW);
+			MessageManager.getInstance().good(p, "Removed all gravity effects!");
+		}
 	}
 
 	public String name() {

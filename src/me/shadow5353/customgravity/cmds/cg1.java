@@ -7,29 +7,31 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class cg1 extends SubCommand{ // /cg 1
+public class cg1 extends SubCommand{
 
 	public void onCommand(Player p, String[] args) {
-		if(!(p.hasPermission("customgravity.1"))){
+		if(!(p.hasPermission("customgravity.-1"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
-		p.removePotionEffect(PotionEffectType.SPEED);
-		p.removePotionEffect(PotionEffectType.JUMP);
-		p.removePotionEffect(PotionEffectType.SLOW);
-		MessageManager.getInstance().good(p, "Gravity set to 1");
-		p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 0));
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
+		else if(p.hasPermission("customgravity.-1")){
+			p.removePotionEffect(PotionEffectType.SPEED);
+			p.removePotionEffect(PotionEffectType.JUMP);
+			p.removePotionEffect(PotionEffectType.SLOW);
+			MessageManager.getInstance().good(p, "Gravity set to -1");
+			p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 0));
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
+		}
 	}
 
 	public String name() {
-		return "1";
+		return "-1";
 	}
 
 	public String info() {
-		return "Sets the Gravity to 1";
+		return "Sets the Gravity to -1";
 	}
 
 	public String[] aliases() {
-		return new String[] { "1" };
+		return new String[] { "-1" };
 	}
 }

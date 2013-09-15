@@ -12,10 +12,12 @@ public class cg0 extends SubCommand{
 		if(!(p.hasPermission("customgravity.0"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
-		p.removePotionEffect(PotionEffectType.SPEED);
-		p.removePotionEffect(PotionEffectType.JUMP);
-		p.removePotionEffect(PotionEffectType.SLOW);
-		MessageManager.getInstance().good(p, "Gravity set to 0");
+		else if(p.hasPermission("customgravity.0")){
+			p.removePotionEffect(PotionEffectType.SPEED);
+			p.removePotionEffect(PotionEffectType.JUMP);
+			p.removePotionEffect(PotionEffectType.SLOW);
+			MessageManager.getInstance().good(p, "Gravity set to 0");
+		}
 	}
 
 	public String name() {

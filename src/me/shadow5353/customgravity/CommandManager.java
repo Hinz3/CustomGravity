@@ -30,20 +30,20 @@ public class CommandManager implements CommandExecutor {
 	private ArrayList<SubCommand> commands = new ArrayList<SubCommand>();
 
 	public void setup() {
-		commands.add(new cgn5());
-		commands.add(new cgn3());
-		commands.add(new cgn2());
+		commands.add(new gravity());
+		commands.add(new remove());
+		commands.add(new Infomation());
 		commands.add(new cgn1());
+		commands.add(new cgn2());
+		commands.add(new cgn3());
 		commands.add(new cgn4());
+		commands.add(new cgn5());
 		commands.add(new cg0());
 		commands.add(new cg1());
 		commands.add(new cg2());
 		commands.add(new cg3());
 		commands.add(new cg4());
 		commands.add(new cg5());
-		commands.add(new gravity());
-		commands.add(new remove());
-		commands.add(new Infomation());
 
 	}
 

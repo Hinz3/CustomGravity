@@ -10,25 +10,26 @@ import org.bukkit.potion.PotionEffectType;
 public class cgn5 extends SubCommand{
 
 	public void onCommand(Player p, String[] args) {
-		if(!(p.hasPermission("customgravity.-5"))){
+		if(!(p.hasPermission("customgravity.5"))){
 			MessageManager.getInstance().severe(p, "You don't have the permission");
+		}else if(p.hasPermission("customgravity.5")){
+			p.removePotionEffect(PotionEffectType.SPEED);
+			p.removePotionEffect(PotionEffectType.JUMP);
+			p.removePotionEffect(PotionEffectType.SLOW);
+			MessageManager.getInstance().good(p, "Gravity set to 5");
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 4));
 		}
-		p.removePotionEffect(PotionEffectType.SPEED);
-		p.removePotionEffect(PotionEffectType.JUMP);
-		p.removePotionEffect(PotionEffectType.SLOW);
-		MessageManager.getInstance().good(p, "Gravity set to -5");
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 4));
 	}
 
 	public String name() {
-		return "-5";
+		return "5";
 	}
 
 	public String info() {
-		return "Sets the Gravity to -5";
+		return "Sets the Gravity to 5";
 	}
 
 	public String[] aliases() {
-		return new String[] { "-5" };
+		return new String[] { "5" };
 	}
 }

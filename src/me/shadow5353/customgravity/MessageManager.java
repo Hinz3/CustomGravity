@@ -13,7 +13,7 @@ public class MessageManager {
 		return instance;
 	}
 
-	private String prefix = ChatColor.GOLD + "[" + ChatColor.DARK_RED + "SP" + ChatColor.GOLD + "] ";
+	private String prefix = ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "] ";
 
 	public void info(CommandSender s, String msg) {
 		msg(s, ChatColor.YELLOW, msg);
