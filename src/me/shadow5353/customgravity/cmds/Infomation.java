@@ -12,6 +12,8 @@ public class Infomation extends SubCommand{
 		MessageManager.getInstance().info(p, "BukkitDev: " + ChatColor.GOLD + "http://bit.ly/Custom-gravity");
 		MessageManager.getInstance().info(p, "Github: " + ChatColor.GOLD + "http://bit.ly/custom-gravity-github");
 		MessageManager.getInstance().info(p, "Version: " + ChatColor.GOLD + "0.2.5");
+		MessageManager.getInstance().info(p, "Official server: " + ChatColor.GOLD + "CosmiCraft");
+		MessageManager.getInstance().info(p, "Server Ip: " + ChatColor.GOLD + "96.8.117.3:25591");
 		MessageManager.getInstance().info(p, "Made by: " + ChatColor.GOLD + "shadow5353");
 		MessageManager.getInstance().info(p, "Request by: " + ChatColor.GOLD + "Baker_san");
 	}

@@ -27,6 +27,18 @@ permission:
             customgravity.-5: op
             customgravity.gravity: op
             customgravity.remove: op
+            customgravity.sign.create: op
+            customgravity.sign.use.0: op
+            customgravity.sign.use.1: op
+            customgravity.sign.use.2: op
+            customgravity.sign.use.3: op
+            customgravity.sign.use.4: op
+            customgravity.sign.use.5: op
+            customgravity.sign.use.-1: op
+            customgravity.sign.use.-2: op
+            customgravity.sign.use.-3: op
+            customgravity.sign.use.-4: op
+            customgravity.sign.use.-5: op
     customgravity.0:
         description: Gives permission to /cg 0
         default: op
@@ -65,4 +77,43 @@ permission:
         default: true
     customgravity.remove:
         description: Gives permission to /cg remove
+        default: op
+    customgravity.sign.use.0:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.1:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.2:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.3:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.4:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.5:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.-1:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.-2:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.-3:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.-4:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.use.-5:
+        description: Gives permission to use signs
+        default: op
+    customgravity.sign.create:
+        description: Gives permission to create all signs
+        default: op
+    customgravity.sign.remove:
+        description: Gives permission to remove signs
         default: op

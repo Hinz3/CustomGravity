@@ -24,7 +24,7 @@ public class remove extends SubCommand{
 	}
 
 	public String info() {
-		return "Remove all potion effects";
+		return "Remove all gravity effects";
 	}
 
 	public String[] aliases() {
