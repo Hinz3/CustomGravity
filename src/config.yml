@@ -1,0 +1,77 @@
+# Help on http://dev.bukkit.org/bukkit-plugins/custom-gravity/pages/config-help/
+per-world-remove: true
+
+#Here you can choose what commands you want in what world you want just without using any permission
+commands:
+
+   #This is for /cg info
+   info:
+   - world
+
+   #This is for /cg gravity
+   gravity:
+   - world
+
+   #This is for /cg remove
+   remove:
+   - world
+
+   #This is for all /cg [gravity level] 
+   gravity-levels:
+      0:
+      - world
+
+      1:
+      - world
+
+      2:
+      - world
+
+      3:
+      - world
+
+      4:
+      - world
+
+      5:
+      - world
+
+      -5:
+      - world
+
+      -4:
+      - world
+
+      -3:
+      - world
+
+      -2:
+      - world
+
+      -1:
+      - world
+      
+      
+gravity:
+   0:
+   - world0
+   1:
+   - world1
+   2:
+   - world2
+   3:
+   - world3
+   4:
+   - world4
+   5:
+   - world5
+   -1:
+   - world-1
+   -2:
+   - world-2
+   -3:
+   - world-3
+   -4:
+   - world-4
+   -5:
+   - world-5

@@ -224,10 +224,9 @@ public class Signs implements Listener{
                     		}else if(!(e.getPlayer().hasPermission("customgravity.sign.use.remove"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
+                    	}
+                        		
                      }
                 }
          }
     }
-    
-    }
-

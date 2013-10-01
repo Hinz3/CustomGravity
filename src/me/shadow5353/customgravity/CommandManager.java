@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import me.shadow5353.customgravity.cmds.Infomation;
+import me.shadow5353.customgravity.cmds.Reload;
+import me.shadow5353.customgravity.cmds.SubCommand;
 import me.shadow5353.customgravity.cmds.cg0;
 import me.shadow5353.customgravity.cmds.cg1;
 import me.shadow5353.customgravity.cmds.cg2;
@@ -15,7 +17,6 @@ import me.shadow5353.customgravity.cmds.cgn2;
 import me.shadow5353.customgravity.cmds.cgn3;
 import me.shadow5353.customgravity.cmds.cgn4;
 import me.shadow5353.customgravity.cmds.cgn5;
-import me.shadow5353.customgravity.cmds.SubCommand;
 import me.shadow5353.customgravity.cmds.gravity;
 import me.shadow5353.customgravity.cmds.remove;
 
@@ -31,8 +32,9 @@ public class CommandManager implements CommandExecutor {
 
 	public void setup() {
 		commands.add(new gravity());
-		commands.add(new remove());
 		commands.add(new Infomation());
+		commands.add(new Reload());
+		commands.add(new remove());
 		commands.add(new cgn1());
 		commands.add(new cgn2());
 		commands.add(new cgn3());
