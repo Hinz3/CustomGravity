@@ -2,9 +2,9 @@ package me.shadow5353.customgravity.cmds;
 
 import me.shadow5353.customgravity.MessageManager;
 import me.shadow5353.customgravity.SettingsManager;
+import me.shadow5353.customgravity.lib.GravityEffect;
 
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
 
 public class remove extends SubCommand{
 
@@ -14,9 +14,8 @@ public class remove extends SubCommand{
 			MessageManager.getInstance().severe(p, "You don't have the permission");
 		}
 		else if(p.hasPermission("customgravity.remove")){
-			p.removePotionEffect(PotionEffectType.SPEED);
-			p.removePotionEffect(PotionEffectType.JUMP);
-			p.removePotionEffect(PotionEffectType.SLOW);
+			GravityEffect ge = new GravityEffect();
+			ge.Level0(p);
 			MessageManager.getInstance().good(p, "Removed all gravity effects!");
 		}
 		}

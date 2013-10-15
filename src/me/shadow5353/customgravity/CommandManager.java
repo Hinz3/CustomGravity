@@ -17,7 +17,6 @@ import me.shadow5353.customgravity.cmds.cgn2;
 import me.shadow5353.customgravity.cmds.cgn3;
 import me.shadow5353.customgravity.cmds.cgn4;
 import me.shadow5353.customgravity.cmds.cgn5;
-import me.shadow5353.customgravity.cmds.gravity;
 import me.shadow5353.customgravity.cmds.remove;
 
 import org.bukkit.ChatColor;
@@ -31,7 +30,6 @@ public class CommandManager implements CommandExecutor {
 	private ArrayList<SubCommand> commands = new ArrayList<SubCommand>();
 
 	public void setup() {
-		commands.add(new gravity());
 		commands.add(new Infomation());
 		commands.add(new Reload());
 		commands.add(new remove());
