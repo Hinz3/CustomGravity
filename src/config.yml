@@ -1,10 +1,7 @@
 # Help on http://dev.bukkit.org/bukkit-plugins/custom-gravity/pages/config-help/
 per-world-remove: true
 
-#This will block milk to remove gravity
-milk-block: true
-
-#Here you can choose what commands you want in what world you want just without using any permission
+#Enable / Disable commands for a specify world without using any permission 
 commands:
 
    #This is for /cg info
@@ -56,25 +53,36 @@ commands:
       
 #Choose what gravity level there should be in a specify world      
 gravity:
+
    0:
    - world0
+
    1:
    - world1
+   
    2:
    - world2
+   
    3:
    - world3
+   
    4:
    - world4
+   
    5:
    - world5
+   
    -1:
    - world-1
+   
    -2:
    - world-2
+   
    -3:
    - world-3
+   
    -4:
    - world-4
+   
    -5:
    - world-5

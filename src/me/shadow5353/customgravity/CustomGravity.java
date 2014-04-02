@@ -7,6 +7,7 @@ import me.shadow5353.customgravity.lib.GravityEffect;
 import me.shadow5353.customgravity.listeners.SignBreak;
 import me.shadow5353.customgravity.listeners.Signs;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -73,7 +74,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 		else if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("remove")) {
 				if (!sender.hasPermission("customgravity.remove")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				GravityEffect ge = new GravityEffect();
@@ -83,7 +84,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				}
 			if (args[0].equalsIgnoreCase("level")) {
 				if (!sender.hasPermission("customgravity.level")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				mm.getInstance().g(p, "Level 0" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level works like /gc remove.");
@@ -113,7 +114,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 			
 			if (args[0].equalsIgnoreCase("reload")) {
 				if (!sender.hasPermission("customgravity.admin")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				config = YamlConfiguration.loadConfiguration(cfile);
@@ -123,16 +124,17 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 			GravityEffect ge = new GravityEffect();
 			if (args[0].equalsIgnoreCase("0")) {
 				if (!sender.hasPermission("customgravity.0")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Level0(p);
 				mm.getInstance().good(p, "Gravity set to 0");
 				return true;
-				}
+					
+					}
 			if (args[0].equalsIgnoreCase("1")) {
 				if (!sender.hasPermission("customgravity.1")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");						
 					return true;
 					}
 				ge.Leveln1(p);
@@ -150,7 +152,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				}
 			if (args[0].equalsIgnoreCase("3")) {
 				if (!sender.hasPermission("customgravity.3")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Leveln3(p);
@@ -159,7 +161,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				}
 			if (args[0].equalsIgnoreCase("4")) {
 				if (!sender.hasPermission("customgravity.4")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Leveln4(p);
@@ -168,7 +170,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				}
 			if (args[0].equalsIgnoreCase("5")) {
 				if (!sender.hasPermission("customgravity.5")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Leveln5(p);
@@ -177,7 +179,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				}
 			if (args[0].equalsIgnoreCase("-1")) {
 				if (!sender.hasPermission("customgravity.-1")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Levelp1(p);
@@ -186,7 +188,7 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				}
 			if (args[0].equalsIgnoreCase("-2")) {
 				if (!sender.hasPermission("customgravity.-2")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Levelp2(p);
@@ -195,13 +197,13 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				}
 			if (args[0].equalsIgnoreCase("-3")) {
 				if (!sender.hasPermission("customgravity.-3")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Levelp3(p);
 				mm.getInstance().good(p, "Gravity set to -3");
-				return true;
-				}
+					return true;
+					}
 			if (args[0].equalsIgnoreCase("-4")) {
 				if (!sender.hasPermission("customgravity.-4")) {
 					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
@@ -210,10 +212,10 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				ge.Levelp4(p);
 				mm.getInstance().good(p, "Gravity set to -4");
 				return true;
-				}
+					}
 			if (args[0].equalsIgnoreCase("-5")) {
 				if (!sender.hasPermission("customgravity.-5")) {
-					sender.sendMessage(ChatColor.DARK_RED + "You do not have permission!");
+					mm.getInstance().severe(p, "You do not have permission!");
 					return true;
 					}
 				ge.Levelp5(p);
@@ -221,6 +223,123 @@ public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 				return true;
 				}
 			}
+		if(args.length == 3){
+			if(args[0].equalsIgnoreCase("set")){
+				if(!p.hasPermission("customgravity.set")){
+					mm.getInstance().severe(p, "You do not have permission!");
+				}
+				if(args[1].equalsIgnoreCase("0")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Level0(target);
+					mm.getInstance().good(target, "Gravity set to 0 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("1")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Leveln1(target);
+					mm.getInstance().good(target, "Gravity set to 1 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("2")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Leveln2(target);
+					mm.getInstance().good(target, "Gravity set to 2 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("3")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Leveln3(target);
+					mm.getInstance().good(target, "Gravity set to 3 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("4")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Leveln4(target);
+					mm.getInstance().good(target, "Gravity set to 4 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("5")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Leveln5(target);
+					mm.getInstance().good(target, "Gravity set to 5 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("-1")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Levelp1(target);
+					mm.getInstance().good(target, "Gravity set to -1 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("-2")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Levelp2(target);
+					mm.getInstance().good(target, "Gravity set to -2 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("-3")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Levelp3(target);
+					mm.getInstance().good(target, "Gravity set to -3 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("-4")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Levelp4(target);
+					mm.getInstance().good(target, "Gravity set to -4 by: " + p.getName() + "!");
+				}
+				if(args[1].equalsIgnoreCase("-5")){
+					Player target = Bukkit.getServer().getPlayer(args[2]);
+					if(target == null){
+						mm.getInstance().severe(p, "Usage: /cg set [gravity level] [player]");
+						return true;
+					}
+					GravityEffect ge = new GravityEffect();
+					ge.Levelp5(target);
+					mm.getInstance().good(target, "Gravity set to -5 by: " + p.getName() + "!");
+				}
+			}
+		}
 		return true;
 		}
 	return true;
@@ -347,6 +466,5 @@ public void onPlayerChangedWorld(PlayerChangedWorldEvent e){
     	}
         else if (!(getConfig().getStringList("gravity.-5").contains(e.getPlayer().getWorld().getName()))){
         	}
-        }
-
+    	}
 }
