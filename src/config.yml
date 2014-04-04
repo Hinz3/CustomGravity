@@ -1,7 +1,13 @@
 # Help on http://dev.bukkit.org/bukkit-plugins/custom-gravity/pages/config-help/
 per-world-remove: true
 
-#Enable / Disable commands for a specify world without using any permission 
+# If this is set to true, players will not lose gravity effects when they drink milk
+milk-bucket-remove: true
+
+#Enable/disable auto update. This will update when there is a new version
+Auto-update: true
+
+# Enable / Disable commands for a specify world without using any permission 
 commands:
 
    #This is for /cg info
