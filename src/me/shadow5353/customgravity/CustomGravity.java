@@ -146,11 +146,12 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					mm.getInstance().g(p,"Level 3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 3.");
 					mm.getInstance().g(p,"Level 4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 4.");
 					mm.getInstance().g(p,"Level 5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 5.");
-					mm.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow.");
-					mm.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 2.");
-					mm.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 3.");
-					mm.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 4.");
-					mm.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 5.");
+					mm.getInstance().g(p,"Level 6" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level will give you fly in 5 minutes");
+					mm.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow.");
+					mm.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 2.");
+					mm.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 3.");
+					mm.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 4.");
+					mm.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 5.");
 					mm.getInstance().info(p,"To get a gravity level use " + ChatColor.GOLD + "/cg [gravity level]");
 					mm.getInstance().info(p, "To change others gravity use " + ChatColor.GOLD + "/cg set [gravity level] [player]");
 					cooldown_level.add(p);
@@ -397,7 +398,7 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}, 5);
 					return true;
 				}
-				if (args[0].equalsIgnoreCase("-6")) {
+				if (args[0].equalsIgnoreCase("6")) {
 
 					if(cooldown_n6.contains(p)){
 						mm.getInstance().severe(p, "Please do not spam this command!");
@@ -410,7 +411,7 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					fly.add(p);
 					cooldown_n6.add(p);
 					p.setFlying(true);
-					mm.getInstance().good(p, "Gravity set to -6");
+					mm.getInstance().good(p, "Gravity set to 6");
 					mm.getInstance().info(p, "You can now fly in 5 minutes");
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 						public void run(){
@@ -530,6 +531,31 @@ public class CustomGravity extends JavaPlugin implements Listener {
 						ge.Leveln5(target);
 						mm.getInstance().good(target,"Gravity set to 5 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
+						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
+							public void run(){
+								cooldown_set.remove(p);
+							}
+						}, 5);
+					}
+					if (args[1].equalsIgnoreCase("6")) {
+						if(cooldown_set.contains(p)){
+							mm.getInstance().severe(p, "Please do not spam this command!");
+						}
+						final Player target = Bukkit.getServer().getPlayer(args[2]);
+						if (target == null) {
+							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							return true;
+						}
+						fly.add(target);
+						target.setFlying(true);
+						mm.getInstance().good(target,"Gravity set to 6 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						cooldown_set.add(p);
+						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
+							public void run(){
+								target.setFlying(false);
+								fly.remove(target);
+							}
+						}, 300);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
 								cooldown_set.remove(p);

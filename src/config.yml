@@ -5,7 +5,7 @@ per-world-remove: true
 milk-bucket-remove: true
 
 #Enable/disable auto update. This will update when there is a new version
-Auto-update: true
+Auto-update: false
 
 # Enable / Disable commands for a specify world without using any permission 
 commands:
