@@ -70,6 +70,11 @@ public class Signs implements Listener{
     			e.setLine(1, "§2Set Gravity");
     			e.setLine(2, "§2-5");
     		}
+    		if(e.getLine(0).equalsIgnoreCase("[-6]")){
+    			e.setLine(0, "§6[CG]");
+    			e.setLine(1, "§2Set Gravity");
+    			e.setLine(2, "§2-6");
+    		}
     	    if(e.getLine(0).equalsIgnoreCase("[remove]")){
 			    e.setLine(0, "§6[CG]");
 			    e.setLine(1, "§2Remove");
@@ -89,71 +94,40 @@ public class Signs implements Listener{
                     if(s.getLine(0).equalsIgnoreCase("§6[CG]")){
                     	if (s.getLine(2).equalsIgnoreCase("§2-5")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.-5")){
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 4));
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
-                        		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to -5");
+                    			e.getPlayer().performCommand("cg -5");
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.-5"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
                     		
                     	}else if(s.getLine(2).equalsIgnoreCase("§2-4")){
                     	    if(e.getPlayer().hasPermission("customgravity.sign.use.-4")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 3));
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
-                        		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to -4");
-
+                    			e.getPlayer().performCommand("cg -4");
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.-4"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
                     		
                     	}else if(s.getLine(2).equalsIgnoreCase("§2-3")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.-3")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 2));
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
-                        		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to -3");
-
+                    			e.getPlayer().performCommand("cg -3");
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.-3"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
                                      		
                     	}else if(s.getLine(2).equalsIgnoreCase("§2-2")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.-2")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1));
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
-                        		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to -2");
-
+                    			e.getPlayer().performCommand("cg -2");
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.-2"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
                     	}else if(s.getLine(2).equalsIgnoreCase("§2-1")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.-1")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, 1));
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
-                        		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to -1");
-
+                    			e.getPlayer().performCommand("cg -1");
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.-1"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
                     	}else if(s.getLine(2).equalsIgnoreCase("§20")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.0")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
+                    			e.getPlayer().performCommand("cg 0");
                         		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to 0");
 
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.0"))){
@@ -161,10 +135,7 @@ public class Signs implements Listener{
                     		}
                     	}else if(s.getLine(2).equalsIgnoreCase("§21")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.1")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10000, 0));
+                    			e.getPlayer().performCommand("cg 1");
                         		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to 1");
 
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.1"))){
@@ -172,10 +143,7 @@ public class Signs implements Listener{
                     		}
                     	}else if(s.getLine(2).equalsIgnoreCase("§22")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.2")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10000, 1));
+                    			e.getPlayer().performCommand("cg 2");
                         		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to 2");
 
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.2"))){
@@ -183,10 +151,7 @@ public class Signs implements Listener{
                     		}
                     	}else if(s.getLine(2).equalsIgnoreCase("§23")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.3")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10000, 2));
+                    			e.getPlayer().performCommand("cg 3");
                         		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to 3");
 
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.2"))){
@@ -194,33 +159,31 @@ public class Signs implements Listener{
                     		}
                     	}else if(s.getLine(2).equalsIgnoreCase("§24")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.4")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10000, 3));
+                    			e.getPlayer().performCommand("cg 4");
                         		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to 4");
 
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.1"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
-                    	}else if(s.getLine(2).equalsIgnoreCase("§2Gravity 5")){
+                    	}else if(s.getLine(2).equalsIgnoreCase("§25")){
                     		if(e.getPlayer().hasPermission("customgravity.sign.use.5")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 10000, 4));
+                    			e.getPlayer().performCommand("cg 5");
                         		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to 5");
 
                     		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.5"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
+                    		else if(s.getLine(2).equalsIgnoreCase("§26")){
+                        		if(e.getPlayer().hasPermission("customgravity.sign.use.6")){
+                        			e.getPlayer().performCommand("cg 6");
+                            		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Gravity set to 5");
+
+                        		}else if (!(e.getPlayer().hasPermission("customgravity.sign.use.5"))){
+                        			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
+                        		}
                     	}else if(s.getLine(1).equalsIgnoreCase("§2Remove gravity")){
                     		if (e.getPlayer().hasPermission("customgravity.sign.use.remove")){
-                    			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
-                        		e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-                        		e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.GREEN + " Removed all gravity effects!");
-                        	
+                    			e.getPlayer().performCommand("cg remove");
                     		}else if(!(e.getPlayer().hasPermission("customgravity.sign.use.remove"))){
                     			e.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "CG" + ChatColor.GOLD + "]" + ChatColor.RED + " You don't have permission!");
                     		}
@@ -230,3 +193,4 @@ public class Signs implements Listener{
                 }
          }
     }
+}

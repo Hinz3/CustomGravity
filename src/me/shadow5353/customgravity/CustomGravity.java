@@ -398,33 +398,17 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}, 5);
 					return true;
 				}
-				if (args[0].equalsIgnoreCase("6")) {
-
-					if(cooldown_n6.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
-					}
+				if (args[0].equalsIgnoreCase("-6")) {
 					
 					if (!sender.hasPermission("customgravity.-6")) {
 						mm.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
-					fly.add(p);
-					cooldown_n6.add(p);
+					p.removePotionEffect(PotionEffectType.SPEED);
+					p.removePotionEffect(PotionEffectType.JUMP);
+					p.removePotionEffect(PotionEffectType.SLOW);
 					p.setFlying(true);
 					mm.getInstance().good(p, "Gravity set to 6");
-					mm.getInstance().info(p, "You can now fly in 5 minutes");
-					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-						public void run(){
-							fly.remove(p);
-							p.setFlying(false);
-							mm.getInstance().severe(p, "Gravity changed to 0");
-						}
-					}, 300);
-					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
-						public void run(){
-							cooldown_n6.remove(p);
-						}
-					}, 5);
 				}
 			}
 			if (args.length == 3) {
@@ -537,7 +521,7 @@ public class CustomGravity extends JavaPlugin implements Listener {
 							}
 						}, 5);
 					}
-					if (args[1].equalsIgnoreCase("6")) {
+					if (args[1].equalsIgnoreCase("-6")) {
 						if(cooldown_set.contains(p)){
 							mm.getInstance().severe(p, "Please do not spam this command!");
 						}
