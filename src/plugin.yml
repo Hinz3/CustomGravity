@@ -1,6 +1,6 @@
 name: CustomGravity
 main: me.shadow5353.customgravity.CustomGravity
-version: 0.4.1
+version: 0.4.3
 description: Change your gravity with commands
 author: shadow5353
 softdepend: [Vault]

@@ -56,7 +56,6 @@ public class CustomGravity extends JavaPlugin implements Listener {
 			Updater updater = new Updater(this, 65511, this.getFile(),Updater.UpdateType.DEFAULT, true);
 		}
 		if (getConfig().getString("Auto-update").contains("false")) {
-			Updater updater = new Updater(this, 65511, this.getFile(),Updater.UpdateType.NO_DOWNLOAD, true);
 		}
 		config = getConfig();
 		config.options().copyDefaults(true);
@@ -82,16 +81,19 @@ public class CustomGravity extends JavaPlugin implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 		if (!(sender instanceof Player)) {
 			mm.getInstance().severe(sender,"Only players can use Custom Gravity");
+			return true;
 		}
 		final Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("customgravity")) {
 			if (args.length == 0) {
 				if(cooldown_cg.contains(p)){
 					mm.getInstance().severe(p, "Please do not spam this command!");
+					return true;
 				}
 				mm.getInstance().cmd(p,"/cg [gravity level]" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Set your gravity");
 				if(p.hasPermission("customgravity.set")){
@@ -141,17 +143,17 @@ public class CustomGravity extends JavaPlugin implements Listener {
 						return true;
 					}
 					mm.getInstance().g(p,"Level 0" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level works like /gc remove.");
-					mm.getInstance().g(p,"Level 1" + ChatColor.DARK_RED + " : "	+ ChatColor.YELLOW + "This level add speed and jump.");
-					mm.getInstance().g(p,"Level 2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 2.");
-					mm.getInstance().g(p,"Level 3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 3.");
-					mm.getInstance().g(p,"Level 4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 4.");
-					mm.getInstance().g(p,"Level 5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 5.");
-					mm.getInstance().g(p,"Level 6" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level will give you fly in 5 minutes");
-					mm.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow.");
-					mm.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 2.");
-					mm.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 3.");
-					mm.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 4.");
-					mm.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add slow 5.");
+					mm.getInstance().g(p,"Level 1" + ChatColor.DARK_RED + " : "	+ ChatColor.YELLOW + "This leve add slow");
+					mm.getInstance().g(p,"Level 2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 2");
+					mm.getInstance().g(p,"Level 3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 3");
+					mm.getInstance().g(p,"Level 4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 4");
+					mm.getInstance().g(p,"Level 5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 5");
+					mm.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed and jump");
+					mm.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 1");
+					mm.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 2 and jump 2");
+					mm.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 3 and jump 3");
+					mm.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 4 and 4 jump.");
+					mm.getInstance().g(p,"Level -6" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level will give you fly in 5 minutes");
 					mm.getInstance().info(p,"To get a gravity level use " + ChatColor.GOLD + "/cg [gravity level]");
 					mm.getInstance().info(p, "To change others gravity use " + ChatColor.GOLD + "/cg set [gravity level] [player]");
 					cooldown_level.add(p);
@@ -169,7 +171,7 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					mm.getInstance().info(p,"BukkitDev: " + ChatColor.GOLD + "http://bit.ly/Custom-gravity");
 					mm.getInstance().info(p,"Github: " + ChatColor.GOLD + "http://bit.ly/custom-gravity-github");
-					mm.getInstance().info(p,"Version: " + ChatColor.GOLD + "0.4.1");
+					mm.getInstance().info(p,"Version: " + ChatColor.GOLD + "0.4.3");
 					mm.getInstance().info(p,"Made by: " + ChatColor.GOLD + "shadow5353");
 					mm.getInstance().info(p,"Twitter: " + ChatColor.GOLD + "http://bit.ly/devcustom-gravity");
 					mm.getInstance().info(p,"Request by: " + ChatColor.GOLD + "Baker_san");
