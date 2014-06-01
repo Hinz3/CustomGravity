@@ -3,8 +3,11 @@ package me.shadow5353.customgravity;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import me.shadow5353.customgravity.lib.GravityEffect;
+import me.shadow5353.customgravity.listeners.GravityMenu;
+import me.shadow5353.customgravity.listeners.MenuOpen;
 import me.shadow5353.customgravity.listeners.SignBreak;
 import me.shadow5353.customgravity.listeners.Signs;
 
@@ -18,8 +21,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -36,6 +44,7 @@ public class CustomGravity extends JavaPlugin implements Listener {
 	ArrayList<Player> cooldown_info = new ArrayList<Player>();
 	ArrayList<Player> cooldown_reload = new ArrayList<Player>();
 	ArrayList<Player> cooldown_remove = new ArrayList<Player>();
+	ArrayList<Player> cooldown_menu = new ArrayList<Player>();
 	ArrayList<Player> cooldown_level = new ArrayList<Player>();
 	ArrayList<Player> cooldown_0 = new ArrayList<Player>();
 	ArrayList<Player> cooldown_n1 = new ArrayList<Player>();
@@ -71,6 +80,7 @@ public class CustomGravity extends JavaPlugin implements Listener {
 		pm.registerEvents(this, this);
 		pm.registerEvents(new Signs(), this);
 		pm.registerEvents(new SignBreak(), this);
+		pm.registerEvents(new GravityMenu(), this);
 
 		// MCStats
 		try {
@@ -134,6 +144,38 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}, 5);
 					return true;
 				}
+				if (args[0].equalsIgnoreCase("give")) {
+					if(cooldown_menu.contains(p)){
+						mm.getInstance().severe(p, "Please do not spam this command!");
+					}
+					if (!sender.hasPermission("customgravity.menu")) {
+						mm.getInstance().severe(p, "You do not have permission!");
+						return true;
+					}
+					PlayerInventory pi = p.getInventory();
+					ItemStack stick = new ItemStack(Material.STICK, 1);
+                    ItemMeta stickmeta = stick.getItemMeta();
+                    stickmeta.setDisplayName(ChatColor.DARK_PURPLE + "Gravity Chooser");
+                    List<String> lore = new ArrayList<String>();
+                    lore.add(ChatColor.GRAY + "Right click to change your gravity");
+                    stickmeta.setLore(lore);
+                    stick.setItemMeta(stickmeta);
+                    if(pi.contains(stick)){
+                    	MessageManager.getInstance().severe(p, "You already have a " + ChatColor.DARK_PURPLE + "Gravity Chooser");
+                    	return true;
+                    }
+                    if(!(pi.contains(stick))){
+                    	pi.addItem(stick);
+                        MessageManager.getInstance().good(p, "You have got a " + ChatColor.DARK_PURPLE +  "Gravity Chooser");
+                    }
+					cooldown_menu.add(p);
+					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
+						public void run(){
+							cooldown_menu.remove(p);
+						}
+					}, 5);
+					return true;
+				}
 				if (args[0].equalsIgnoreCase("level")) {
 					if(cooldown_level.contains(p)){
 						mm.getInstance().severe(p, "Please do not spam this command!");
@@ -148,11 +190,11 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					mm.getInstance().g(p,"Level 3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 3");
 					mm.getInstance().g(p,"Level 4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 4");
 					mm.getInstance().g(p,"Level 5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 5");
-					mm.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed and jump");
-					mm.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 1 and jump 1");
-					mm.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 2 and jump 2");
-					mm.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 3 and jump 3");
-					mm.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add speed 4 and 4 jump.");
+					mm.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump");
+					mm.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 1");
+					mm.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 2");
+					mm.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 3");
+					mm.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 4.");
 					mm.getInstance().g(p,"Level -6" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level will give you fly in 5 minutes");
 					mm.getInstance().info(p,"To get a gravity level use " + ChatColor.GOLD + "/cg [gravity level]");
 					mm.getInstance().info(p, "To change others gravity use " + ChatColor.GOLD + "/cg set [gravity level] [player]");
@@ -171,7 +213,7 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					mm.getInstance().info(p,"BukkitDev: " + ChatColor.GOLD + "http://bit.ly/Custom-gravity");
 					mm.getInstance().info(p,"Github: " + ChatColor.GOLD + "http://bit.ly/custom-gravity-github");
-					mm.getInstance().info(p,"Version: " + ChatColor.GOLD + "0.4.3");
+					mm.getInstance().info(p,"Version: " + ChatColor.GOLD + "0.4.4");
 					mm.getInstance().info(p,"Made by: " + ChatColor.GOLD + "shadow5353");
 					mm.getInstance().info(p,"Twitter: " + ChatColor.GOLD + "http://bit.ly/devcustom-gravity");
 					mm.getInstance().info(p,"Request by: " + ChatColor.GOLD + "Baker_san");
@@ -652,6 +694,22 @@ public class CustomGravity extends JavaPlugin implements Listener {
 	}
 
 	// events
+	public void onPlayerInteract (PlayerInteractEvent e){
+		ItemStack menu = new ItemStack(Material.STICK, 1);
+        ItemMeta stickmeta = menu.getItemMeta();
+        stickmeta.setDisplayName(ChatColor.DARK_PURPLE + "Gravity Chooser");
+        List<String> lore = new ArrayList<String>();
+        lore.add(ChatColor.GRAY + "Right click to change your gravity");
+        stickmeta.setLore(lore);
+        menu.setItemMeta(stickmeta);
+		if(!(e.getAction() == Action.RIGHT_CLICK_AIR)) return;
+		if(!(e.getItem().getType().equals(menu))) return;
+		final Player p = e.getPlayer();
+		
+		GravityMenu.show(p);
+		return;
+		
+	}
 
 	@EventHandler
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent e) {
