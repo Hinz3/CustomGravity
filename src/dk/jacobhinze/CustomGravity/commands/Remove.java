@@ -1,10 +1,7 @@
 package dk.jacobhinze.CustomGravity.commands;
 
 import dk.jacobhinze.CustomGravity.Message;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 /**
@@ -14,13 +11,9 @@ public class Remove {
 
     /**
      * Remove gravity effects for a player
-     * @param player the sender that will
+     * @param player the sender
      */
     public static void removeEffects(Player player) {
-        if(!player.hasPermission("customgravity.remove")) {
-            Message.noPermissionMessage(player);
-            return;
-        }
 
         player.removePotionEffect(PotionEffectType.SPEED);
         player.removePotionEffect(PotionEffectType.JUMP);
@@ -29,11 +22,12 @@ public class Remove {
         return;
     }
 
+    /**
+     * Remove gravity effects for another player
+     * @param player the player that send the command
+     * @param target the target that will get removed effects
+     */
     public static void removeEffectsForTarget(Player player, Player target) {
-        if(!player.hasPermission("customgravity.remove.other")) {
-            Message.noPermissionMessage(player);
-            return;
-        }
 
         if(target.equals(null)) {
             Message.errorMessage(player, target + " this player do not exist!");

@@ -1,0 +1,11 @@
+name: CustomGravity
+main: dk.jacobhinze.CustomGravity.Main
+version: 5.0 Dev
+description: Change your gravity with commands
+author: shadow5353
+
+commands:
+    customgravity:
+        usage: /<command>
+        description: main command
+        aliases: [cg]

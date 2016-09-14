@@ -1,11 +1,13 @@
 package dk.jacobhinze.CustomGravity;
 
 import dk.jacobhinze.CustomGravity.commands.Remove;
+import dk.jacobhinze.CustomGravity.commands.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -13,9 +15,23 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Main extends JavaPlugin {
 
+    private static Main instance;
+
     public void onEnable() {
         // todo config
+
+        instance = this;
     }
+
+    public void onDisable() {
+
+        instance = null;
+    }
+
+    public static Main getPlugin() {
+        return instance;
+    }
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -33,8 +49,13 @@ public class Main extends JavaPlugin {
             }
 
             if(args[0].equalsIgnoreCase("remove")){
-
+                // Remove gravity effects
                 if(args.length == 2) {
+                    if(!player.hasPermission("customgravity.remove.other")) {
+                        Message.noPermissionMessage(player);
+                        return true;
+                    }
+
                     Player target = Bukkit.getPlayer(args[1]);
                     Remove.removeEffectsForTarget(player, target);
 
@@ -43,19 +64,42 @@ public class Main extends JavaPlugin {
                     return true;
                 }
 
-                Remove.removeEffects(player);
+                if(!player.hasPermission("customgravity.remove")) {
+                    Message.noPermissionMessage(player);
+                    return true;
+                }
                 Message.goodMessage(player, "All gravity effects have been removed!");
                 return true;
             }
 
             if(args[0].equalsIgnoreCase("set")) {
-                // todo gravity effects
+                // todo set gravity effects
 
-                if(args.length == 2) {
-                    Player target = Bukkit.getPlayer(args[1]);
+                if(!(args.length == 2)) {
+                    Message.errorMessage(player, "You have to specify a gravity level!");
+                    return true;
+                }
+
+                int gravityLevel = Integer.parseInt(args[1]);
+
+                if(args.length == 3) {
+                    if(!(player.hasPermission("customgravity.set.others"))) {
+                        Message.noPermissionMessage(player);
+                        return true;
+                    }
+                    Player target = Bukkit.getPlayer(args[2]);
+
 
                     return true;
                 }
+
+                if(!(player.hasPermission("customgravity.set"))) {
+                    Message.noPermissionMessage(player);
+                    return true;
+                }
+
+                Set.setGravity(player, gravityLevel);
+
             }
 
             if(args[0].equalsIgnoreCase("level")) {
