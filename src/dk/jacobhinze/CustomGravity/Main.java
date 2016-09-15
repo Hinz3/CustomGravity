@@ -18,7 +18,8 @@ public class Main extends JavaPlugin {
     private static Main instance;
 
     public void onEnable() {
-        // todo config
+        // config
+        saveDefaultConfig();
 
         instance = this;
     }
@@ -44,7 +45,7 @@ public class Main extends JavaPlugin {
 
         if(command.getName().equalsIgnoreCase("customgravity")) {
             if(args.length == 0) {
-                commandList(player);
+                Messages.commandList(player);
                 return true;
             }
 
@@ -73,7 +74,7 @@ public class Main extends JavaPlugin {
             }
 
             if(args[0].equalsIgnoreCase("set")) {
-                // todo set gravity effects
+                // set gravity effects
 
                 if(!(args.length == 2)) {
                     Message.errorMessage(player, "You have to specify a gravity level!");
@@ -104,37 +105,39 @@ public class Main extends JavaPlugin {
             }
 
             if(args[0].equalsIgnoreCase("level")) {
-                // todo show a list over levels
-            }
+                // show a list over levels
+                if(!(player.hasPermission("customgravity.level"))) {
+                    Message.noPermissionMessage(player);
+                    return true;
+                }
 
+                Messages.levelListMessage(player);
+                return true;
+            }
             if(args[0].equalsIgnoreCase("info")) {
-                // todo show information about the plugin
+                // show information about the plugin
+                if(!(player.hasPermission("customgravity.info"))) {
+                    Message.noPermissionMessage(player);
+                    return true;
+                }
+
+                Messages.informationMessage(player);
+                return true;
             }
 
             if(args[0].equalsIgnoreCase("reload")) {
-                // todo reload the plugin config
+                // reload the plugin config
+                if(!(player.hasPermission("customgravity.reload"))) {
+                    Message.noPermissionMessage(player);
+                    return true;
+                }
+
+                reloadConfig();
+                Message.goodMessage(player, "The config.yml have been reloaded");
+                return true;
             }
         }
 
         return true;
-    }
-
-    private static void commandList(CommandSender sender) {
-        sender.sendMessage(ChatColor.GOLD + "------------------------------");
-        command(sender, "cg", "Show a list of command");
-        command(sender, "cg set [Gravity Level] (Player)", "Change your gravity on you or a player");
-        command(sender, "cg remove", "Remove all the gravity effects");
-        command(sender, "cg level", "Show a list of gravity levels");
-        command(sender, "cg info", "Show information about the plugin");
-
-        if(sender.hasPermission("customgravity.admin")) {
-            command(sender, "cg reload", "Reload the plugins config");
-        }
-
-        sender.sendMessage(ChatColor.GOLD + "------------------------------");
-    }
-
-    private static void command(CommandSender sender, String command, String description) {
-        sender.sendMessage(ChatColor.GOLD + "/" + command + ChatColor.BLACK + " : " + ChatColor.YELLOW + description);
     }
 }

@@ -14,27 +14,36 @@ import java.util.HashMap;
  */
 public class Set {
 
-    public static HashMap<Player, Integer> cooldownTime = new HashMap<Player, Integer>();
-    public static HashMap<Player, BukkitRunnable> cooldownTask = new HashMap<Player, BukkitRunnable>();
+    private static HashMap<Player, Integer> cooldownTime = new HashMap<>();
+    private static HashMap<Player, BukkitRunnable> cooldownTask = new HashMap<>();
 
 
+    /**
+     * Set gravity for a player
+     * @param player the player that will get changed gravity effects
+     * @param level the gravity level
+     */
     public static void setGravity(Player player, int level) {
-        if(cooldownTime.containsKey(player)) {
-            Message.errorMessage(player, "You have to wait " + cooldownTime.get(player) + " seconds before you can use this command!");
+        if(isInCooldown(player)) {
+            Message.errorMessage(player, "You have to wait " + getCooldown(player) + " seconds before you can use this command!");
             return;
         }
         gravityLevels(player, level, player);
     }
 
-    public static void setGravityTarget(Player player, Player target, int level) {
-        if(cooldownTime.containsKey(player)) {
-            Message.errorMessage(player, "You have to wait " + cooldownTime.get(player) + " seconds before you can use this command!");
+    /**
+     * Sets another players gravity
+     * @param sender the sender that sends the command
+     * @param target the target that will get changed gravity effects
+     * @param level the gravity level
+     */
+    public static void setGravityTarget(Player sender, Player target, int level) {
+        if(isInCooldown(sender)) {
+            Message.errorMessage(sender, "You have to wait " + getCooldown(sender) + " seconds before you can use this command!");
             return;
         }
 
-        gravityLevels(target, level, player);
-        Message.goodMessage(player, "You have changed " + target.getName() + " gravity!");
-        Message.infoMessage(target, "Your gravity was changed by " + target.getName());
+        gravityLevels(target, level, sender);
     }
 
     /**
@@ -86,27 +95,27 @@ public class Set {
                 break;
             case -2:
                 Remove.removeEffects(player);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 1));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 1));
                 message += "-2";
                 done = true;
                 break;
             case -3:
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 2));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 2));
                 message += "-3";
                 done = true;
                 break;
             case -4:
                 Remove.removeEffects(player);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 3));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 3));
                 message += "-4";
                 done = true;
                 break;
             case -5:
                 Remove.removeEffects(player);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 4));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 4));
                 message += "-5";
                 done = true;
@@ -126,8 +135,13 @@ public class Set {
         }
     }
 
+    /**
+     * Set a player into cooldown
+     * @param player the player that will get cooldown
+     *
+     */
     public static void putInCooldown(Player player) {
-        cooldownTime.put(player, 5);
+        cooldownTime.put(player, Main.getPlugin().getConfig().getInt("cooldown"));
         cooldownTask.put(player, new BukkitRunnable() {
             @Override
             public void run() {
@@ -135,11 +149,34 @@ public class Set {
                 if(cooldownTime.get(player) == 0) {
                     cooldownTime.remove(player);
                     cooldownTask.remove(player);
+                    Message.infoMessage(player, "You can now use gravity effects!");
                 }
             }
         });
 
         cooldownTask.get(player).runTaskTimer(Main.getPlugin(), 20, 20);
+    }
+
+    /**
+     * Get the cooldown for a player
+     * @param player the player who have cooldown
+     * @return the number of seconds
+     */
+    public static int getCooldown(Player player) {
+        return cooldownTime.get(player);
+    }
+
+    /**
+     * Check if the player have a cooldown
+     * @param player the player that will get checked
+     * @return the player is in cooldown or not
+     */
+    public static boolean isInCooldown(Player player) {
+        if(cooldownTime.containsKey(player)) {
+            return true;
+        }
+
+        return false;
     }
 }
 
