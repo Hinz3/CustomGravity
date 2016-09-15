@@ -2,6 +2,7 @@ package dk.jacobhinze.CustomGravity.commands;
 
 import dk.jacobhinze.CustomGravity.Main;
 import dk.jacobhinze.CustomGravity.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -23,7 +24,7 @@ public class Set {
      * @param player the player that will get changed gravity effects
      * @param level the gravity level
      */
-    public static void setGravity(Player player, int level) {
+    public static void setGravity(Player player, String level) {
         if(isInCooldown(player)) {
             Message.errorMessage(player, "You have to wait " + getCooldown(player) + " seconds before you can use this command!");
             return;
@@ -37,7 +38,7 @@ public class Set {
      * @param target the target that will get changed gravity effects
      * @param level the gravity level
      */
-    public static void setGravityTarget(Player sender, Player target, int level) {
+    public static void setGravityTarget(Player sender, Player target, String level) {
         if(isInCooldown(sender)) {
             Message.errorMessage(sender, "You have to wait " + getCooldown(sender) + " seconds before you can use this command!");
             return;
@@ -52,78 +53,62 @@ public class Set {
      * @param level the level of effects it will add to the player
      * @param sender who send the command and receive error message.
      */
-    private static void gravityLevels(Player player, int level, Player sender) {
-        String message = "Your gravity level have been changed to level ";
+    private static void gravityLevels(Player player, String level, Player sender) {
+        String message = "Your gravity level have been changed to level " + level;
         boolean done = false;
         switch (level) {
-            case 1:
+            case "1":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 0));
-                message += "1";
                 done = true;
                 break;
-            case 2:
+            case "2":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 1));
-                message += "2";
                 done = true;
                 break;
-            case 3:
+            case "3":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 2));
-                message += "3";
                 done = true;
                 break;
-            case 4:
+            case "4":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 3));
-                message += "4";
                 done = true;
                 break;
-            case 5:
+            case "5":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 4));
-                message += "5";
                 done = true;
                 break;
-            case -1:
+            case "-1":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 0));
-                message += "-1";
                 done = true;
                 break;
-            case -2:
+            case "-2":
                 Remove.removeEffects(player);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 1));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 1));
-                message += "-2";
                 done = true;
                 break;
-            case -3:
+            case "-3":
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 2));
-                message += "-3";
                 done = true;
                 break;
-            case -4:
+            case "-4":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 3));
-                message += "-4";
                 done = true;
                 break;
-            case -5:
+            case "-5":
                 Remove.removeEffects(player);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000, 4));
-                message += "-5";
-                done = true;
-                break;
-            case -6:
-                Remove.removeEffects(player);
-                player.setFlying(true);
-                message += "-6";
                 done = true;
                 break;
             default:
@@ -132,6 +117,7 @@ public class Set {
         }
         if(done) {
             Message.goodMessage(player, message);
+            putInCooldown(sender);
         }
     }
 
@@ -149,7 +135,7 @@ public class Set {
                 if(cooldownTime.get(player) == 0) {
                     cooldownTime.remove(player);
                     cooldownTask.remove(player);
-                    Message.infoMessage(player, "You can now use gravity effects!");
+                    cancel();
                 }
             }
         });

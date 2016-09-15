@@ -1,0 +1,97 @@
+# Help on http://dev.bukkit.org/bukkit-plugins/custom-gravity/pages/config-help/
+per-world-remove: true
+
+# If this is set to true, players will not lose gravity effects when they drink milk
+milk-bucket-remove: true
+
+# Enable/disable auto update. This will update when there is a new version
+Auto-update: false
+
+#
+cooldown: 5
+
+# Enable / Disable commands for a specify world without using any permission
+commands:
+
+   # This is for /cg info
+   info:
+   - world
+
+   # This is for /cg gravity
+   gravity:
+   - world
+
+   # This is for /cg remove
+   remove:
+   - world
+
+   #This is for all /cg [gravity level]
+   gravity-levels:
+      0:
+      - world
+
+      1:
+      - world
+
+      2:
+      - world
+
+      3:
+      - world
+
+      4:
+      - world
+
+      5:
+      - world
+
+      -5:
+      - world
+
+      -4:
+      - world
+
+      -3:
+      - world
+
+      -2:
+      - world
+
+      -1:
+      - world
+
+#Choose what gravity level there should be in a specify world
+gravity:
+
+   0:
+   - world0
+
+   1:
+   - world1
+
+   2:
+   - world2
+
+   3:
+   - world3
+
+   4:
+   - world4
+
+   5:
+   - world5
+
+   -1:
+   - world-1
+
+   -2:
+   - world-2
+
+   -3:
+   - world-3
+
+   -4:
+   - world-4
+
+   -5:
+   - world-5

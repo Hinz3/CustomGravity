@@ -26,7 +26,7 @@ public class Main extends JavaPlugin {
 
     public void onDisable() {
 
-        instance = null;
+        //instance = null;
     }
 
     public static Main getPlugin() {
@@ -70,6 +70,7 @@ public class Main extends JavaPlugin {
                     return true;
                 }
                 Message.goodMessage(player, "All gravity effects have been removed!");
+                Remove.removeEffects(player);
                 return true;
             }
 
@@ -81,7 +82,8 @@ public class Main extends JavaPlugin {
                     return true;
                 }
 
-                int gravityLevel = Integer.parseInt(args[1]);
+
+                String gravityLevel = args[1];
 
                 if(args.length == 3) {
                     if(!(player.hasPermission("customgravity.set.others"))) {
@@ -101,7 +103,7 @@ public class Main extends JavaPlugin {
                 }
 
                 Set.setGravity(player, gravityLevel);
-
+                return true;
             }
 
             if(args[0].equalsIgnoreCase("level")) {
@@ -136,6 +138,9 @@ public class Main extends JavaPlugin {
                 Message.goodMessage(player, "The config.yml have been reloaded");
                 return true;
             }
+
+            Message.errorMessage(player, "That command does not exist!");
+            return true;
         }
 
         return true;

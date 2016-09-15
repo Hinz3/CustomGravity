@@ -41,7 +41,7 @@ public class Messages {
         player.sendMessage(ChatColor.GOLD + "------------------------------");
         player.sendMessage(ChatColor.GOLD + "Plugin Name: " + ChatColor.YELLOW + Main.getPlugin().getDescription().getName());
         player.sendMessage(ChatColor.GOLD + "Plugin version: " + ChatColor.YELLOW + Main.getPlugin().getDescription().getVersion());
-        player.sendMessage(ChatColor.GOLD + "Plugin author: " + ChatColor.YELLOW + Main.getPlugin().getDescription().getAuthors());
+        player.sendMessage(ChatColor.GOLD + "Plugin author: shadow5353");
         player.sendMessage(ChatColor.GOLD + "Plugin Website: " + ChatColor.YELLOW + Main.getPlugin().getDescription().getWebsite());
         player.sendMessage(ChatColor.GOLD + "------------------------------");
     }
@@ -59,11 +59,10 @@ public class Messages {
         levelListConstructor(player, "-3", "Add speed 1 & jump 3");
         levelListConstructor(player, "-4", "Add speed 1 & jump 4");
         levelListConstructor(player, "-5", "Add speed 1 & jump 5");
-        levelListConstructor(player, "-6", "Gives " + Main.getPlugin().getConfig().getInt("fly") + " minutes fly");
         player.sendMessage(ChatColor.GOLD + "------------------------------");
     }
 
     private static void levelListConstructor(Player player, String level, String description) {
-        player.sendMessage(ChatColor.GOLD + level + ChatColor.BLACK + " : " + ChatColor.YELLOW + description);
+        player.sendMessage(ChatColor.GOLD + "Level: " + level + ChatColor.BLACK + " : " + ChatColor.YELLOW + description);
     }
 }

@@ -18,7 +18,6 @@ public class Remove {
         player.removePotionEffect(PotionEffectType.SPEED);
         player.removePotionEffect(PotionEffectType.JUMP);
         player.removePotionEffect(PotionEffectType.SLOW);
-        player.setFlying(false);
         return;
     }
 
@@ -37,7 +36,6 @@ public class Remove {
         target.removePotionEffect(PotionEffectType.SPEED);
         target.removePotionEffect(PotionEffectType.SLOW);
         target.removePotionEffect(PotionEffectType.JUMP);
-        target.setFlying(false);
         return;
     }
 }
