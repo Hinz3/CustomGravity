@@ -89,6 +89,7 @@ public class Main extends JavaPlugin {
                     }
                     Player target = Bukkit.getPlayer(args[2]);
 
+                    Set.setGravityTarget(player, target, gravityLevel);
 
                     return true;
                 }

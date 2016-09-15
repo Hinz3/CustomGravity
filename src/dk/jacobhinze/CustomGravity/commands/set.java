@@ -1,36 +1,34 @@
 package dk.jacobhinze.CustomGravity.commands;
-/**
- * Created by Jacob on 14-09-2016.
- */
 
 import dk.jacobhinze.CustomGravity.Main;
 import dk.jacobhinze.CustomGravity.Message;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Jacob Hinze on 14-09-2016.
  */
 public class Set {
 
-    public static ArrayList<Player> cooldown = new ArrayList<Player>();
+    public static HashMap<Player, Integer> cooldownTime = new HashMap<Player, Integer>();
+    public static HashMap<Player, BukkitRunnable> cooldownTask = new HashMap<Player, BukkitRunnable>();
+
 
     public static void setGravity(Player player, int level) {
-        if(cooldown.contains(player)) {
-            Message.errorMessage(player, "");
+        if(cooldownTime.containsKey(player)) {
+            Message.errorMessage(player, "You have to wait " + cooldownTime.get(player) + " seconds before you can use this command!");
+            return;
         }
-
         gravityLevels(player, level, player);
     }
 
     public static void setGravityTarget(Player player, Player target, int level) {
-        if(!(player.hasPermission("customgravity.set.others"))) {
-            Message.noPermissionMessage(player);
+        if(cooldownTime.containsKey(player)) {
+            Message.errorMessage(player, "You have to wait " + cooldownTime.get(player) + " seconds before you can use this command!");
             return;
         }
 
@@ -123,23 +121,25 @@ public class Set {
                 Message.errorMessage(sender, "This gravity effect level does not exists!");
                 break;
         }
-        if(done == true) {
+        if(done) {
             Message.goodMessage(player, message);
         }
-
-        return;
-
     }
 
-    public static void setCooldown(Player player) {
-        cooldown.add(player);
-
-        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable(){
-            public void run(){
-                cooldown.remove(player);
+    public static void putInCooldown(Player player) {
+        cooldownTime.put(player, 5);
+        cooldownTask.put(player, new BukkitRunnable() {
+            @Override
+            public void run() {
+                cooldownTime.put(player, cooldownTime.get(player) -1);
+                if(cooldownTime.get(player) == 0) {
+                    cooldownTime.remove(player);
+                    cooldownTask.remove(player);
+                }
             }
-        }, 10);
+        });
+
+        cooldownTask.get(player).runTaskTimer(Main.getPlugin(), 20, 20);
     }
 }
+
