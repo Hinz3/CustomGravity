@@ -1,15 +1,15 @@
-package me.shadow5353.customgravity;
+package com.shadow5353;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-public class MessageManager {
+public class mm {
 
-	private MessageManager() { }
+	private mm() { }
 
-	private static MessageManager instance = new MessageManager();
+	private static mm instance = new mm();
 
-	public static MessageManager getInstance() {
+	public static mm getInstance() {
 		return instance;
 	}
 

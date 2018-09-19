@@ -1,4 +1,4 @@
-package me.shadow5353.customgravity.listeners;
+package com.shdow5353.listeners;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Sign;

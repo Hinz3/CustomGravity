@@ -1,4 +1,4 @@
-package me.shadow5353.customgravity;
+package com.shadow5353;
 
 
 import java.io.*;

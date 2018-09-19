@@ -1,4 +1,4 @@
-package me.shadow5353.customgravity.lib;
+package com.shdow5353.lib;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;

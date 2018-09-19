@@ -1,4 +1,4 @@
-package me.shadow5353.customgravity;
+package com.shadow5353;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;

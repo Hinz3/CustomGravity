@@ -1,15 +1,15 @@
-package me.shadow5353.customgravity;
+package com.shadow5353;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.shadow5353.customgravity.lib.GravityEffect;
-import me.shadow5353.customgravity.listeners.GravityMenu;
-import me.shadow5353.customgravity.listeners.MenuOpen;
-import me.shadow5353.customgravity.listeners.SignBreak;
-import me.shadow5353.customgravity.listeners.Signs;
+import com.shadow5353.lib.GravityEffect;
+import com.shadow5353.listeners.GravityMenu;
+import com.shadow5353.listeners.MenuOpen;
+import com.shadow5353.listeners.SignBreak;
+import com.shadow5353.listeners.Signs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -95,25 +95,25 @@ public class CustomGravity extends JavaPlugin implements Listener {
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 		if (!(sender instanceof Player)) {
-			mm.getInstance().severe(sender,"Only players can use Custom Gravity");
+			MessageManager.getInstance().severe(sender,"Only players can use Custom Gravity");
 			return true;
 		}
 		final Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("customgravity")) {
 			if (args.length == 0) {
 				if(cooldown_cg.contains(p)){
-					mm.getInstance().severe(p, "Please do not spam this command!");
+					MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					return true;
 				}
-				mm.getInstance().cmd(p,"/cg [gravity level]" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Set your gravity");
+				MessageManager.getInstance().cmd(p,"/cg [gravity level]" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Set your gravity");
 				if(p.hasPermission("customgravity.set")){
-					mm.getInstance().cmd(p, "/cg set [gravity level] [player]" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Changes others gravity");
+					MessageManager.getInstance().cmd(p, "/cg set [gravity level] [player]" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Changes others gravity");
 				}
-				mm.getInstance().cmd(p,"/cg remove" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Remove all gravity effects");
-				mm.getInstance().cmd(p,"/cg level" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Shows all gravity levels");
-				mm.getInstance().cmd(p,"/cg info" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Shows info about the plugin");
+				MessageManager.getInstance().cmd(p,"/cg remove" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Remove all gravity effects");
+				MessageManager.getInstance().cmd(p,"/cg level" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Shows all gravity levels");
+				MessageManager.getInstance().cmd(p,"/cg info" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Shows info about the plugin");
 				if (p.hasPermission("customgravity.admin")) {
-					mm.getInstance().cmd(p,"/cg reload" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Reload the config.yml");
+					MessageManager.getInstance().cmd(p,"/cg reload" + ChatColor.BLACK + " : " + ChatColor.YELLOW + "Reload the config.yml");
 				}
 				cooldown_cg.add(p);
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
@@ -127,16 +127,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 			else if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("remove")) {
 					if(cooldown_remove.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.remove")) {
-						mm.getInstance().severe(p, "You do not have permission!");
+						MessageManager.getInstance().severe(p, "You do not have permission!");
 						return true;
 					}
 					GravityEffect ge = new GravityEffect();
 					cooldown_remove.add(p);
 					ge.Level0(p);
-					mm.getInstance().good(p, "Removed all gravity effects!");
+					MessageManager.getInstance().good(p, "Removed all gravity effects!");
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
 							cooldown_remove.remove(p);
@@ -146,10 +146,10 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("give")) {
 					if(cooldown_menu.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.menu")) {
-						mm.getInstance().severe(p, "You do not have permission!");
+						MessageManager.getInstance().severe(p, "You do not have permission!");
 						return true;
 					}
 					PlayerInventory pi = p.getInventory();
@@ -178,26 +178,26 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("level")) {
 					if(cooldown_level.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.level")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
-					mm.getInstance().g(p,"Level 0" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level works like /gc remove.");
-					mm.getInstance().g(p,"Level 1" + ChatColor.DARK_RED + " : "	+ ChatColor.YELLOW + "This leve add slow");
-					mm.getInstance().g(p,"Level 2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 2");
-					mm.getInstance().g(p,"Level 3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 3");
-					mm.getInstance().g(p,"Level 4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 4");
-					mm.getInstance().g(p,"Level 5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 5");
-					mm.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump");
-					mm.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 1");
-					mm.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 2");
-					mm.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 3");
-					mm.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 4.");
-					mm.getInstance().g(p,"Level -6" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level will give you fly in 5 minutes");
-					mm.getInstance().info(p,"To get a gravity level use " + ChatColor.GOLD + "/cg [gravity level]");
-					mm.getInstance().info(p, "To change others gravity use " + ChatColor.GOLD + "/cg set [gravity level] [player]");
+					MessageManager.getInstance().g(p,"Level 0" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level works like /gc remove.");
+					MessageManager.getInstance().g(p,"Level 1" + ChatColor.DARK_RED + " : "	+ ChatColor.YELLOW + "This leve add slow");
+					MessageManager.getInstance().g(p,"Level 2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 2");
+					MessageManager.getInstance().g(p,"Level 3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 3");
+					MessageManager.getInstance().g(p,"Level 4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 4");
+					MessageManager.getInstance().g(p,"Level 5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This leve add slow 5");
+					MessageManager.getInstance().g(p,"Level -1" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump");
+					MessageManager.getInstance().g(p,"Level -2" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 1");
+					MessageManager.getInstance().g(p,"Level -3" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 2");
+					MessageManager.getInstance().g(p,"Level -4" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 3");
+					MessageManager.getInstance().g(p,"Level -5" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level add jump 4.");
+					MessageManager.getInstance().g(p,"Level -6" + ChatColor.DARK_RED + " : " + ChatColor.YELLOW + "This level will give you fly in 5 minutes");
+					MessageManager.getInstance().info(p,"To get a gravity level use " + ChatColor.GOLD + "/cg [gravity level]");
+					MessageManager.getInstance().info(p, "To change others gravity use " + ChatColor.GOLD + "/cg set [gravity level] [player]");
 					cooldown_level.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -209,14 +209,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 
 				if (args[0].equalsIgnoreCase("info")) {
 					if(cooldown_info.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
-					mm.getInstance().info(p,"BukkitDev: " + ChatColor.GOLD + "http://bit.ly/Custom-gravity");
-					mm.getInstance().info(p,"Github: " + ChatColor.GOLD + "http://bit.ly/custom-gravity-github");
-					mm.getInstance().info(p,"Version: " + ChatColor.GOLD + "0.4.4");
-					mm.getInstance().info(p,"Made by: " + ChatColor.GOLD + "shadow5353");
-					mm.getInstance().info(p,"Twitter: " + ChatColor.GOLD + "http://bit.ly/devcustom-gravity");
-					mm.getInstance().info(p,"Request by: " + ChatColor.GOLD + "Baker_san");
+					MessageManager.getInstance().info(p,"BukkitDev: " + ChatColor.GOLD + "http://bit.ly/Custom-gravity");
+					MessageManager.getInstance().info(p,"Github: " + ChatColor.GOLD + "http://bit.ly/custom-gravity-github");
+					MessageManager.getInstance().info(p,"Version: " + ChatColor.GOLD + "0.5.1");
+					MessageManager.getInstance().info(p,"Made by: " + ChatColor.GOLD + "shadow5353");
+					MessageManager.getInstance().info(p,"Twitter: " + ChatColor.GOLD + "http://bit.ly/devcustom-gravity");
+					MessageManager.getInstance().info(p,"Request by: " + ChatColor.GOLD + "Baker_san");
 					cooldown_info.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -228,14 +228,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 
 				if (args[0].equalsIgnoreCase("reload")) {
 					if(cooldown_reload.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.admin")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					config = YamlConfiguration.loadConfiguration(cfile);
-					mm.getInstance().good(p, "Reloaded config.yml!");
+					MessageManager.getInstance().good(p, "Reloaded config.yml!");
 					cooldown_reload.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -247,11 +247,11 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				GravityEffect ge = new GravityEffect();
 				if (args[0].equalsIgnoreCase("0")) {
 					if (!sender.hasPermission("customgravity.0")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Level0(p);
-					mm.getInstance().good(p, "Gravity set to 0");
+					MessageManager.getInstance().good(p, "Gravity set to 0");
 					cooldown_0.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -263,14 +263,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("1")) {
 					if(cooldown_p1.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.1")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Leveln1(p);
-					mm.getInstance().good(p, "Gravity set to 1");
+					MessageManager.getInstance().good(p, "Gravity set to 1");
 					cooldown_p1.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -281,15 +281,15 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("2")) {
 					if(cooldown_p2.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.2")) {
-						mm.getInstance().severe(p, "You do not have permission!");
+						MessageManager.getInstance().severe(p, "You do not have permission!");
 						
 						return true;
 					}
 					ge.Leveln2(p);
-					mm.getInstance().good(p, "Gravity set to 2");
+					MessageManager.getInstance().good(p, "Gravity set to 2");
 					cooldown_p2.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -300,14 +300,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("3")) {
 					if(cooldown_p3.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.3")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Leveln3(p);
-					mm.getInstance().good(p, "Gravity set to 3");
+					MessageManager.getInstance().good(p, "Gravity set to 3");
 					cooldown_p3.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -318,14 +318,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("4")) {
 					if(cooldown_p4.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.4")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Leveln4(p);
-					mm.getInstance().good(p, "Gravity set to 4");
+					MessageManager.getInstance().good(p, "Gravity set to 4");
 					cooldown_p4.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -336,14 +336,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("5")) {
 					if(cooldown_p5.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.5")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Leveln5(p);
-					mm.getInstance().good(p, "Gravity set to 5");
+					MessageManager.getInstance().good(p, "Gravity set to 5");
 					cooldown_p5.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -354,14 +354,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("-1")) {
 					if(cooldown_n1.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.-1")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Levelp1(p);
-					mm.getInstance().good(p, "Gravity set to -1");
+					MessageManager.getInstance().good(p, "Gravity set to -1");
 					cooldown_n1.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -372,14 +372,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("-2")) {
 					if(cooldown_n2.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.-2")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Levelp2(p);
-					mm.getInstance().good(p, "Gravity set to -2");
+					MessageManager.getInstance().good(p, "Gravity set to -2");
 					cooldown_n2.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -390,14 +390,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("-3")) {
 					if(cooldown_n3.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.-3")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Levelp3(p);
-					mm.getInstance().good(p, "Gravity set to -3");
+					MessageManager.getInstance().good(p, "Gravity set to -3");
 					cooldown_n3.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -408,14 +408,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("-4")) {
 					if(cooldown_n4.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.-4")) {
-						mm.getInstance().severe(p, "You do not have permission!");
+						MessageManager.getInstance().severe(p, "You do not have permission!");
 						return true;
 					}
 					ge.Levelp4(p);
-					mm.getInstance().good(p, "Gravity set to -4");
+					MessageManager.getInstance().good(p, "Gravity set to -4");
 					cooldown_n4.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -426,14 +426,14 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				}
 				if (args[0].equalsIgnoreCase("-5")) {
 					if(cooldown_n5.contains(p)){
-						mm.getInstance().severe(p, "Please do not spam this command!");
+						MessageManager.getInstance().severe(p, "Please do not spam this command!");
 					}
 					if (!sender.hasPermission("customgravity.-5")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					ge.Levelp5(p);
-					mm.getInstance().good(p, "Gravity set to -5");
+					MessageManager.getInstance().good(p, "Gravity set to -5");
 					cooldown_n5.add(p);
 					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 						public void run(){
@@ -445,43 +445,43 @@ public class CustomGravity extends JavaPlugin implements Listener {
 				if (args[0].equalsIgnoreCase("-6")) {
 					
 					if (!sender.hasPermission("customgravity.-6")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 						return true;
 					}
 					p.removePotionEffect(PotionEffectType.SPEED);
 					p.removePotionEffect(PotionEffectType.JUMP);
 					p.removePotionEffect(PotionEffectType.SLOW);
 					p.setFlying(true);
-					mm.getInstance().good(p, "Gravity set to 6");
+					MessageManager.getInstance().good(p, "Gravity set to 6");
 				}
 			}
 			if (args.length == 3) {
 				if (args[0].equalsIgnoreCase("set")) {
 					if (!p.hasPermission("customgravity.set")) {
-						mm.getInstance().severe(p,"You do not have permission!");
+						MessageManager.getInstance().severe(p,"You do not have permission!");
 					}
 					if (args[1].equalsIgnoreCase("0")) {
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Level0(target);
-						mm.getInstance().good(target,"Gravity set to 0 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to 0 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 					}
 					if (args[1].equalsIgnoreCase("1")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Leveln1(target);
-						mm.getInstance().good(target,"Gravity set to 1 by: " + p.getName() +  ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to 1 by: " + p.getName() +  ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -491,16 +491,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("2")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Leveln2(target);
-						mm.getInstance().good(target,"Gravity set to 2 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to 2 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -510,16 +510,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("3")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Leveln3(target);
-						mm.getInstance().good(target,"Gravity set to 3 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to 3 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -529,16 +529,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("4")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Leveln4(target);
-						mm.getInstance().good(target,"Gravity set to 4 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to 4 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -548,16 +548,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("5")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Leveln5(target);
-						mm.getInstance().good(target,"Gravity set to 5 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to 5 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -567,16 +567,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("-6")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						final Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						fly.add(target);
 						target.setFlying(true);
-						mm.getInstance().good(target,"Gravity set to 6 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to 6 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -592,16 +592,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("-1")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Levelp1(target);
-						mm.getInstance().good(target,"Gravity set to -1 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to -1 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -611,16 +611,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("-2")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Levelp2(target);
-						mm.getInstance().good(target,"Gravity set to -2 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to -2 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -630,16 +630,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("-3")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Levelp3(target);
-						mm.getInstance().good(target, "Gravity set to -3 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target, "Gravity set to -3 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -649,17 +649,17 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("-4")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");		
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");		
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Levelp4(target);
-						mm.getInstance().good(target,"Gravity set to -4 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to -4 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){
@@ -669,16 +669,16 @@ public class CustomGravity extends JavaPlugin implements Listener {
 					}
 					if (args[1].equalsIgnoreCase("-5")) {
 						if(cooldown_set.contains(p)){
-							mm.getInstance().severe(p, "Please do not spam this command!");
+							MessageManager.getInstance().severe(p, "Please do not spam this command!");
 						}
 						Player target = Bukkit.getServer().getPlayer(args[2]);
 						if (target == null) {
-							mm.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
+							MessageManager.getInstance().severe(p,"Error: Cannot find " + ChatColor.DARK_RED + args[2] + ChatColor.RED + "!");
 							return true;
 						}
 						GravityEffect ge = new GravityEffect();
 						ge.Levelp5(target);
-						mm.getInstance().good(target,"Gravity set to -5 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
+						MessageManager.getInstance().good(target,"Gravity set to -5 by: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + "!");
 						cooldown_set.add(p);
 						Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 							public void run(){

@@ -1,6 +1,6 @@
-package me.shadow5353.customgravity.listeners;
+package com.shdow5353.listeners;
 
-import me.shadow5353.customgravity.MessageManager;
+import com.shadow5353.MessageManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
